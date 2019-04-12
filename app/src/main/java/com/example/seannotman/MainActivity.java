@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity
     private ListView listApps;
     private FeedAdapter adapter;
 
+    DatabaseHelper listdatabaseHelper;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
