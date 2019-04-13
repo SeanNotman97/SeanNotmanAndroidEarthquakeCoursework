@@ -2,8 +2,15 @@ package com.example.seannotman;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
-public class FeedEntry implements Parcelable {
+import java.io.Serializable;
+
+import static android.content.ContentValues.TAG;
+
+
+
+public class Earthquake implements Parcelable {
 
     private String name;
     private String latitude;
@@ -14,7 +21,7 @@ public class FeedEntry implements Parcelable {
     private String magnitude;
     private String dateTime;
 
-    public FeedEntry(String name, String latitude, String longitude, String day, String location, String depth, String magnitude, String dateTime) {
+    public Earthquake(String name, String latitude, String longitude, String day, String location, String depth, String magnitude, String dateTime) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -26,7 +33,7 @@ public class FeedEntry implements Parcelable {
 
     }
 
-    public FeedEntry(){
+    public Earthquake(){
         this.name = "";
         this.latitude = "";
         this.longitude = "";
@@ -38,10 +45,21 @@ public class FeedEntry implements Parcelable {
     }
 
 
+    @Override
+    public String toString() {
+        return "Earthquake{" +
+                "name='" + name + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", day='" + day + '\'' +
+                ", location='" + location + '\'' +
+                ", depth='" + depth + '\'' +
+                ", magnitude='" + magnitude + '\'' +
+                ", dateTime='" + dateTime + '\'' +
+                '}';
+    }
 
-
-
-    protected FeedEntry(Parcel in) {
+    protected Earthquake(Parcel in) {
         name = in.readString();
         latitude = in.readString();
         longitude = in.readString();
@@ -52,17 +70,23 @@ public class FeedEntry implements Parcelable {
         dateTime = in.readString();
     }
 
-    public static final Creator<FeedEntry> CREATOR = new Creator<FeedEntry>() {
+    public static final Creator<Earthquake> CREATOR = new Creator<Earthquake>() {
         @Override
-        public FeedEntry createFromParcel(Parcel in) {
-            return new FeedEntry(in);
+        public Earthquake createFromParcel(Parcel in) {
+            return new Earthquake(in);
         }
 
 
         @Override
-        public FeedEntry[] newArray(int size) {
-            return new FeedEntry[size];
+        public Earthquake[] newArray(int size) {
+            return new Earthquake[size];
+
+
+
         }
+
+
+
     };
 
     @Override

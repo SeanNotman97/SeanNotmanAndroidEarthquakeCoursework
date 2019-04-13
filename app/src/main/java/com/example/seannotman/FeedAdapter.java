@@ -3,7 +3,6 @@ package com.example.seannotman;
 
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import java.util.HashMap;
-
 
 
 import java.util.ArrayList;
@@ -24,10 +21,10 @@ public class FeedAdapter extends ArrayAdapter implements Filterable {
     private static final String TAG = "FeedAdapter";
     private final int layoutResource;
     private final LayoutInflater layoutInflater;
-    private List<FeedEntry> applications;
-    private List<FeedEntry> listCopyFull;
+    private List<Earthquake> applications;
+    private List<Earthquake> listCopyFull;
 
-    public FeedAdapter(Context context, int resource, List<FeedEntry> applications) {
+    public FeedAdapter(Context context, int resource, List<Earthquake> applications) {
         super(context, resource);
         this.layoutResource = resource;
         this.layoutInflater = LayoutInflater.from(context);
@@ -49,7 +46,7 @@ public class FeedAdapter extends ArrayAdapter implements Filterable {
         TextView dayText = (TextView) convertView.findViewById(R.id.tvArtist);
         //   TextView tvSummary = (TextView) convertView.findViewById(R.id.tvSummary);
 
-        FeedEntry earthquakeItem = applications.get(position);
+        Earthquake earthquakeItem = applications.get(position);
 
         String desc = earthquakeItem.getName();
 
@@ -144,7 +141,7 @@ public class FeedAdapter extends ArrayAdapter implements Filterable {
  @Override
  protected FilterResults performFiltering(CharSequence constraint) {
 
- List<FeedEntry> filteredList = new ArrayList<>();
+ List<Earthquake> filteredList = new ArrayList<>();
 
 
  //if no entry then show full list
@@ -155,7 +152,7 @@ public class FeedAdapter extends ArrayAdapter implements Filterable {
  //not case sensitive trim removes spaces
  String filterPattern = constraint.toString().toLowerCase().trim();
 
- for (FeedEntry item : listCopyFull) {
+ for (Earthquake item : listCopyFull) {
  if (item.getName().toLowerCase().contains(filterPattern)) {
  filteredList.add(item);
  }

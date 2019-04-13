@@ -13,19 +13,19 @@ import java.util.ArrayList;
 
 public class ParseEarthquakes {
     private static final String TAG = "ParseEarthquakes";
-    private ArrayList<FeedEntry> applications;
+    private ArrayList<Earthquake> applications;
 
     public ParseEarthquakes() {
         this.applications = new ArrayList<>();
     }
 
-    public ArrayList<FeedEntry> getApplications() {
+    public ArrayList<Earthquake> getApplications() {
         return applications;
     }
 
     public boolean parse(String xmlData) {
         boolean status = true;
-        FeedEntry currentRecord = null;
+        Earthquake currentRecord = null;
         boolean inEntry = false;
         String textValue = "";
 
@@ -39,10 +39,10 @@ public class ParseEarthquakes {
                 String tagName = xpp.getName();
                 switch (eventType) {
                     case XmlPullParser.START_TAG:
-                        Log.d(TAG, "parse: Starting tag for " + tagName);
+                      //  Log.d(TAG, "parse: Starting tag for " + tagName);
                         if("item".equalsIgnoreCase(tagName)) {
                             inEntry = true;
-                            currentRecord = new FeedEntry();
+                            currentRecord = new Earthquake();
                         }
                         break;
 
@@ -51,7 +51,7 @@ public class ParseEarthquakes {
                         break;
 
                     case XmlPullParser.END_TAG:
-                        Log.d(TAG, "parse: Ending tag for " + tagName);
+                       // Log.d(TAG, "parse: Ending tag for " + tagName);
                         if(inEntry) {
                             if("item".equalsIgnoreCase(tagName)) {
                                 applications.add(currentRecord);
@@ -79,7 +79,7 @@ public class ParseEarthquakes {
                 eventType = xpp.next();
 
             }
-            for (FeedEntry app: applications) {
+            for (Earthquake app: applications) {
                 Log.d(TAG, "******************");
                 Log.d(TAG, app.toString());
             }

@@ -37,7 +37,7 @@
 //
 //        /**
 //        Intent earthquakeMap = getIntent();
-//        FeedEntry earthquakeItem = earthquakeMap.getParcelableExtra("Coordinates");
+//        Earthquake earthquakeItem = earthquakeMap.getParcelableExtra("Coordinates");
 //
 //        String earthquakeName = earthquakeItem.getName();
 //        String earthquakeMagnitude = earthquakeItem.getMagnitude();

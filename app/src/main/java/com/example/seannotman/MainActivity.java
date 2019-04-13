@@ -25,14 +25,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
     private ListView listApps;
     private FeedAdapter adapter;
+    private ArrayList<Earthquake> earthquakeArrayList;
 
-    DatabaseHelper listdatabaseHelper;
+   // DatabaseHelper listdatabaseHelper;
 
 
     @Override
@@ -77,9 +79,86 @@ public class MainActivity extends AppCompatActivity
             final ParseEarthquakes parseEarthquakes = new ParseEarthquakes();
             parseEarthquakes.parse(s);
 
-//            ArrayAdapter<FeedEntry> arrayAdapter = new ArrayAdapter<FeedEntry>(
-//                    MainActivity.this, R.layout.list_item, parseEarthquakes.getApplications());
-//            listApps.setAdapter(arrayAdapter);
+
+
+
+            earthquakeArrayList = parseEarthquakes.getApplications();
+for(Earthquake e : earthquakeArrayList){
+
+    String desc = e.getName();
+
+    //https://www.youtube.com/watch?v=sJ-Z9G0SDhc
+
+
+
+    String[] splitDescription = desc.split(";", -1);
+
+    String[] dayDateTime = splitDescription[0].split(":", -1);
+
+    String[] daySplit = dayDateTime[1].split(",", -1);
+
+    String day = daySplit[0];
+
+    String dateTime = daySplit[1];
+
+    e.setDateTime(dateTime);
+    //  currentApp.setDay(day);
+
+
+    e.setDay(day);
+
+
+    String[] locationSplit = splitDescription[1].split(":", -1);
+
+    String location = locationSplit[1];
+
+    e.setLocation(location);
+
+    //Set name text as Location
+
+
+    String[] LatLong = splitDescription[2].split(":", -1);
+
+    String[] Lat = LatLong[1].split(",", -1);
+
+    String Latitude = Lat[0];
+    String Longitude = Lat[1];
+
+
+
+
+    e.setLatitude(Latitude);
+    e.setLongitude(Longitude);
+
+
+
+    String[] splitDepth = splitDescription[3].split(":", -1);
+    String depth = splitDepth[1];
+
+
+
+
+    e.setDepth(depth);
+
+
+
+    String[] splitMagnitude = splitDescription[4].split(":", -1);
+    String magnitude = splitMagnitude[1];
+
+
+
+    e.setMagnitude(magnitude);
+
+
+    Log.d(TAG, "onPostExecute: " + e.toString());
+
+
+
+}
+
+
+
+
             adapter = new FeedAdapter(MainActivity.this, R.layout.list_record, parseEarthquakes.getApplications());
             listApps.setAdapter(adapter);
 
@@ -89,13 +168,13 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(MainActivity.this, MainActivity4.class);
-                    intent.putExtra("Example Item", parseEarthquakes.getApplications().get(position));
+                    intent.putExtra("Example Item", earthquakeArrayList.get(position));
 
                     startActivity(intent);
-
-
                 }
             });
+
+
 
         }
 
@@ -205,10 +284,20 @@ public class MainActivity extends AppCompatActivity
 //        final ParseEarthquakes parseEarthquakes = new ParseEarthquakes();
 
         if (id == R.id.nav_camera) {
-//            Intent earthquakeMap = new Intent(this, MapsActivity.class);
-//            earthquakeMap.putExtra("Earthquake Coordinates", parseEarthquakes.getApplications());
-//            startActivity(earthquakeMap);
+
+            Intent intentEarthquakeMap = new Intent(MainActivity.this, MapsActivity2.class);
+            intentEarthquakeMap.putParcelableArrayListExtra("EarthquakeList", earthquakeArrayList);
+            // intentEarthquakeList.putExtra("EarthquakeList", earthquakeArrayList);
+
+            startActivity(intentEarthquakeMap);
+
         } else if (id == R.id.nav_gallery) {
+
+            Intent intentEarthquakeList = new Intent(MainActivity.this, MainActivity5.class);
+            intentEarthquakeList.putParcelableArrayListExtra("EarthquakeList", earthquakeArrayList);
+           // intentEarthquakeList.putExtra("EarthquakeList", earthquakeArrayList);
+
+            startActivity(intentEarthquakeList);
 
         } else if (id == R.id.nav_slideshow) {
 
