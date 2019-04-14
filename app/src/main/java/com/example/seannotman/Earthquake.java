@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 import static android.content.ContentValues.TAG;
 
@@ -13,15 +14,16 @@ import static android.content.ContentValues.TAG;
 public class Earthquake implements Parcelable {
 
     private String name;
-    private String latitude;
-    private String longitude;
+    private Double latitude;
+    private Double longitude;
     private String day;
     private String location;
-    private String depth;
-    private String magnitude;
+    private Double depth;
+    private Double magnitude;
     private String dateTime;
 
-    public Earthquake(String name, String latitude, String longitude, String day, String location, String depth, String magnitude, String dateTime) {
+
+    public Earthquake(String name, Double latitude, Double longitude, String day, String location, Double depth, Double magnitude, String dateTime) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -30,17 +32,16 @@ public class Earthquake implements Parcelable {
         this.depth = depth;
         this.magnitude = magnitude;
         this.dateTime = dateTime;
-
     }
 
     public Earthquake(){
         this.name = "";
-        this.latitude = "";
-        this.longitude = "";
+        this.latitude = 0.0;
+        this.longitude = 0.0;
         this.day = "";
         this.location = "";
-        this.depth = "";
-        this.magnitude = "";
+        this.depth = 0.0;
+        this.magnitude = 0.0;
         this.dateTime = "";
     }
 
@@ -61,12 +62,12 @@ public class Earthquake implements Parcelable {
 
     protected Earthquake(Parcel in) {
         name = in.readString();
-        latitude = in.readString();
-        longitude = in.readString();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
         day = in.readString();
         location = in.readString();
-        depth = in.readString();
-        magnitude = in.readString();
+        depth = in.readDouble();
+        magnitude = in.readDouble();
         dateTime = in.readString();
     }
 
@@ -80,8 +81,6 @@ public class Earthquake implements Parcelable {
         @Override
         public Earthquake[] newArray(int size) {
             return new Earthquake[size];
-
-
 
         }
 
@@ -97,21 +96,14 @@ public class Earthquake implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(name);
-        parcel.writeString(latitude);
-        parcel.writeString(longitude);
+        parcel.writeDouble(latitude);
+        parcel.writeDouble(longitude);
         parcel.writeString(day);
         parcel.writeString(location);
-        parcel.writeString(depth);
-        parcel.writeString(magnitude);
+        parcel.writeDouble(depth);
+        parcel.writeDouble(magnitude);
         parcel.writeString(dateTime);
-
     }
-
-
-
-
-
-
 
     public String getName() {
         return name;
@@ -121,19 +113,19 @@ public class Earthquake implements Parcelable {
         this.name = name;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
@@ -153,19 +145,19 @@ public class Earthquake implements Parcelable {
         this.day = day;
     }
 
-    public void setDepth(String depth) {
+    public void setDepth(Double depth) {
         this.depth = depth;
     }
 
-    public String getDepth() {
+    public Double getDepth() {
         return depth;
     }
 
-    public void setMagnitude(String magnitude) {
+    public void setMagnitude(Double magnitude) {
         this.magnitude = magnitude;
     }
 
-    public String getMagnitude() {
+    public Double getMagnitude() {
         return magnitude;
     }
 
@@ -178,6 +170,33 @@ public class Earthquake implements Parcelable {
         return dateTime;
     }
 
+    public static final Comparator<Earthquake> cmp = new Comparator<Earthquake>() {
+        @Override
+        public int compare(Earthquake o1, Earthquake o2) {
+            return Double.compare(o1.getDepth(), o2.getDepth());
+        }
+    };
+
+    public static final Comparator<Earthquake> cmp2 = new Comparator<Earthquake>() {
+        @Override
+        public int compare(Earthquake o1, Earthquake o2) {
+            return Double.compare(o1.getMagnitude(), o2.getMagnitude());
+        }
+    };
+
+    public static final Comparator<Earthquake> cmp3 = new Comparator<Earthquake>() {
+        @Override
+        public int compare(Earthquake o1, Earthquake o2) {
+            return Double.compare(o1.getLongitude(), o2.getLongitude());
+        }
+    };
+
+    public static final Comparator<Earthquake> cmp4 = new Comparator<Earthquake>() {
+        @Override
+        public int compare(Earthquake o1, Earthquake o2) {
+            return Double.compare(o1.getLatitude(), o2.getLatitude());
+        }
+    };
 
 
 

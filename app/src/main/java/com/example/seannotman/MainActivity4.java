@@ -17,8 +17,8 @@ public class MainActivity4 extends AppCompatActivity implements OnMapReadyCallba
 
     private static final String TAG = "MapsActivity";
     private GoogleMap mMap;
-    String preEarthquakeLat;
-    String preEarthquakeLong;
+    Double EarthquakeLat;
+    Double EarthquakeLong;
     String earthquakeMarkerTitle;
 
     @Override
@@ -30,14 +30,14 @@ public class MainActivity4 extends AppCompatActivity implements OnMapReadyCallba
         Earthquake earthquakeItem = intent.getParcelableExtra("Example Item");
 
         String earthquakeName = earthquakeItem.getName();
-        String earthquakeMagnitude = earthquakeItem.getMagnitude();
-        String earthquakeDepth = earthquakeItem.getDepth();
+        Double earthquakeMagnitude = earthquakeItem.getMagnitude();
+        Double earthquakeDepth = earthquakeItem.getDepth();
 
         String earthquakeMarker = earthquakeItem.getLocation();
         earthquakeMarkerTitle = earthquakeMarker;
 
-        preEarthquakeLat = earthquakeItem.getLatitude();
-        preEarthquakeLong = earthquakeItem.getLongitude();
+        EarthquakeLat = earthquakeItem.getLatitude();
+        EarthquakeLong = earthquakeItem.getLongitude();
 
 
 
@@ -45,10 +45,10 @@ public class MainActivity4 extends AppCompatActivity implements OnMapReadyCallba
         textView1.setText(earthquakeName);
 
         TextView textView2 = findViewById(R.id.activity4_textView2);
-        textView2.setText(earthquakeMagnitude);
+        textView2.setText(earthquakeMagnitude.toString());
 
         TextView textView3 = findViewById(R.id.activity4_textView3);
-        textView3.setText(earthquakeDepth);
+        textView3.setText(earthquakeDepth.toString());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -66,11 +66,11 @@ public class MainActivity4 extends AppCompatActivity implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        double Latd = Double.parseDouble(preEarthquakeLat);
-        double Longd = Double.parseDouble(preEarthquakeLong);
+        //double Latd = Double.parseDouble(preEarthquakeLat);
+        //double Longd = Double.parseDouble(preEarthquakeLong);
 
         // Add a marker in Sydney and move the camera
-        LatLng earthquakeLocation = new LatLng(Latd, Longd);
+        LatLng earthquakeLocation = new LatLng(EarthquakeLat, EarthquakeLong);
 
         Log.d(TAG, "LatLngs: " + earthquakeLocation);
 

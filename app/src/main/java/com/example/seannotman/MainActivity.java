@@ -83,13 +83,11 @@ public class MainActivity extends AppCompatActivity
 
 
             earthquakeArrayList = parseEarthquakes.getApplications();
-for(Earthquake e : earthquakeArrayList){
+for(Earthquake earthquakeItem : earthquakeArrayList){
 
-    String desc = e.getName();
+    String desc = earthquakeItem.getName();
 
     //https://www.youtube.com/watch?v=sJ-Z9G0SDhc
-
-
 
     String[] splitDescription = desc.split(";", -1);
 
@@ -101,65 +99,75 @@ for(Earthquake e : earthquakeArrayList){
 
     String dateTime = daySplit[1];
 
-    e.setDateTime(dateTime);
+    earthquakeItem.setDateTime(dateTime);
     //  currentApp.setDay(day);
 
+    Log.d(TAG, "getDay: " + day);
 
-    e.setDay(day);
 
+    earthquakeItem.setDay(day);
+
+
+
+    Log.d(TAG, "getEarthquake set: " + earthquakeItem.getDay());
 
     String[] locationSplit = splitDescription[1].split(":", -1);
 
+    Log.d(TAG, "getLocation: " + locationSplit[1]);
+
     String location = locationSplit[1];
 
-    e.setLocation(location);
+    earthquakeItem.setLocation(location);
 
     //Set name text as Location
 
 
     String[] LatLong = splitDescription[2].split(":", -1);
-
+    Log.d(TAG, "getLatLong: " + LatLong[1]);
     String[] Lat = LatLong[1].split(",", -1);
 
     String Latitude = Lat[0];
     String Longitude = Lat[1];
+    Log.d(TAG, "getLat: " + Latitude);
+    Log.d(TAG, "getLong: " + Longitude);
 
 
-
-
-    e.setLatitude(Latitude);
-    e.setLongitude(Longitude);
+    earthquakeItem.setLatitude(Double.valueOf(Latitude));
+    earthquakeItem.setLongitude(Double.valueOf(Longitude));
 
 
 
     String[] splitDepth = splitDescription[3].split(":", -1);
-    String depth = splitDepth[1];
+
+    String[] splitDepth2 = splitDepth[1].split(" ", -1);
+
+    String[] splitDepth3 = splitDepth2[1].split(" ", -1);
+
+    String depth = splitDepth3[0];
+
+    Log.d(TAG, "onPostExecute: " + depth);
 
 
 
-
-    e.setDepth(depth);
+    earthquakeItem.setDepth(Double.valueOf(depth));
 
 
 
     String[] splitMagnitude = splitDescription[4].split(":", -1);
     String magnitude = splitMagnitude[1];
+    Log.d(TAG, "getMagnitude: " + magnitude);
 
 
 
-    e.setMagnitude(magnitude);
+    earthquakeItem.setMagnitude(Double.valueOf(magnitude));
 
-
-    Log.d(TAG, "onPostExecute: " + e.toString());
+    Log.d(TAG, "onPostExecute: " + earthquakeItem.toString());
 
 
 
 }
 
-
-
-
-            adapter = new FeedAdapter(MainActivity.this, R.layout.list_record, parseEarthquakes.getApplications());
+            adapter = new FeedAdapter(MainActivity.this, R.layout.list_record, earthquakeArrayList);
             listApps.setAdapter(adapter);
 
 
