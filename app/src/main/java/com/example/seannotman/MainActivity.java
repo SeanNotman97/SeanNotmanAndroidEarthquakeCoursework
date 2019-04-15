@@ -99,7 +99,7 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 
     String dateTimeSplit = daySplit[1];
 
-    Log.d(TAG, "dayTimeSplit" + dateTimeSplit);
+   // Log.d(TAG, "dayTimeSplit" + dateTimeSplit);
 
     String[] dateTime1 = dateTimeSplit.split(" ", -1);
 
@@ -111,12 +111,12 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 
     String dateTimea3 = (dateTime + " " + dateTimea1 + " " + dateTimea2);
 
-    Log.d(TAG, "dateTime " + dateTimea3);
+    //Log.d(TAG, "dateTime " + dateTimea3);
 
     earthquakeItem.setDateTime(dateTimea3);
     //  currentApp.setDay(day);
 
-    Log.d(TAG, "getDay: " + day);
+    Log.d(TAG, "getDate: " + dateTimea3);
 
     earthquakeItem.setDay(day);
 //
@@ -132,7 +132,7 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 //
    String timeSplit5 = dayDateTime[3];
 
-    Log.d(TAG, "ts1 " + "/" + timeSplit3 + "/" + timeSplit4 + "/" + timeSplit5);
+   // Log.d(TAG, "ts1 " + "/" + timeSplit3 + "/" + timeSplit4 + "/" + timeSplit5);
 
     earthquakeItem.seteTime(timeSplit3 + ":" + timeSplit4 + ":" + timeSplit5);
 //    Log.d(TAG, "timesplit3: " + timeSplit3);
@@ -144,11 +144,11 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 
 
 
-    Log.d(TAG, "getEarthquake set: " + earthquakeItem.getDay());
+   // Log.d(TAG, "getEarthquake set: " + earthquakeItem.getDay());
 
     String[] locationSplit = splitDescription[1].split(":", -1);
 
-    Log.d(TAG, "getLocation: " + locationSplit[1]);
+    //Log.d(TAG, "getLocation: " + locationSplit[1]);
 
     String location = locationSplit[1];
 
@@ -158,13 +158,13 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 
 
     String[] LatLong = splitDescription[2].split(":", -1);
-    Log.d(TAG, "getLatLong: " + LatLong[1]);
+   // Log.d(TAG, "getLatLong: " + LatLong[1]);
     String[] Lat = LatLong[1].split(",", -1);
 
     String Latitude = Lat[0];
     String Longitude = Lat[1];
-    Log.d(TAG, "getLat: " + Latitude);
-    Log.d(TAG, "getLong: " + Longitude);
+    //Log.d(TAG, "getLat: " + Latitude);
+    //Log.d(TAG, "getLong: " + Longitude);
 
 
     earthquakeItem.setLatitude(Double.valueOf(Latitude));
@@ -180,7 +180,7 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 
     String depth = splitDepth3[0];
 
-    //Log.d(TAG, "onPostExecute: " + depth);
+    Log.d(TAG, "onPostExecute: " + depth);
 
 
 
@@ -190,7 +190,7 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 
     String[] splitMagnitude = splitDescription[4].split(":", -1);
     String magnitude = splitMagnitude[1];
-    Log.d(TAG, "getMagnitude: " + magnitude);
+   // Log.d(TAG, "getMagnitude: " + magnitude);
 
 
 

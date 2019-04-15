@@ -27,9 +27,14 @@ public class MainActivity5 extends AppCompatActivity implements AdapterView.OnIt
 
     List<String> dateListSize = new ArrayList<>();
     private String[] dates;
-
+    //private int position = ;
     //private String dateText;
+    //Spinner spin;
 
+    private String selectedDate;
+
+    Earthquake lowestDepthDate;
+    //private int selectionPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,29 +57,39 @@ public class MainActivity5 extends AppCompatActivity implements AdapterView.OnIt
 
         }
 
-
-
-        //Log.d(TAG,"dateList" + dates);
-        //Getting the instance of Spinner and applying OnItemSelectedListener on it
-
         dates = dateListSize.toArray(new String[dateListSize.size()]);
-        Log.d(TAG, "dates " + Arrays.toString(dates));
+
+
+        //Log.d(TAG, "dates " + Arrays.toString(dates));
 
         Spinner spin = findViewById(R.id.spinner);
+        spin.setOnItemSelectedListener(this);
+
+        //spin.setSelection(((ArrayAdapter<String>)spin.getAdapter()).getPosition());
+
+
 
         //String dateText = spin.getSelectedItem().toString();
 
-        spin.setOnItemSelectedListener(this);
-
-
+//        spin.setOnItemSelectedListener(this);
+//        int indexValue = spin.getSelectedItemPosition();
+//        Log.d(TAG, "onCreate: " + indexValue);
 
 
         //Creating the ArrayAdapter instance having the country list
         ArrayAdapter<String> aa = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, dates);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
+//        int spinnerPosition = aa.getPosition(dates);
+//        spin.setSelection(spinnerPosition);
+
         spin.setAdapter(aa);
 
+
+
+        //use this
+       // int selectionPosition = aa.getPosition("YOUR_VALUE");
+       // spin.setSelection(selectionPosition);
 
 
 
@@ -85,41 +100,121 @@ public class MainActivity5 extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id)
     {
-        Toast.makeText(getApplicationContext(),dates[position] , Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),dates[position] , Toast.LENGTH_LONG).show();
 
+    //https://stackoverflow.com/questions/20151414/how-can-i-use-onitemselected-in-android
+        Toast.makeText(arg0.getContext(),
+                "OnItemSelectedListener : " + arg0.getItemAtPosition(position).toString(),
+                Toast.LENGTH_SHORT).show();
+       selectedDate = arg0.getItemAtPosition(position).toString();
+       // Log.d(TAG, "onCreate: " + selectedDate);
 
+//        Earthquake highestDepth = Collections.max(earthquakeArrayList, cmp);
+//        Log.d(TAG, "highestDepth: " + highestDepth);
 
-        Earthquake highestDepth = Collections.max(earthquakeArrayList, Earthquake.cmp);
-        Log.d(TAG, "highestDepth: " + highestDepth);
+      //  Earthquake lowestDepth = Collections.min(earthquakeArrayList, cmp);
+        //Log.d(TAG, "lowestDepth: " + lowestDepth);
 
-        Earthquake lowestDepth = Collections.min(earthquakeArrayList, Earthquake.cmp);
-        Log.d(TAG, "lowestDepth: " + lowestDepth);
+//        Earthquake lowestMagnitude = Collections.min(earthquakeArrayList, cmp2);
+//        Log.d(TAG, "lowestMagnitude " + lowestMagnitude);
+//
+//        Earthquake highestMagnitude = Collections.max(earthquakeArrayList, cmp2);
+//        Log.d(TAG, "highestMagnitude " + highestMagnitude);
+//
+//        Earthquake mostSouth = Collections.min(earthquakeArrayList, cmp3);
+//        Log.d(TAG, "mostSouth " + mostSouth);
+//
+//        Earthquake mostNorth = Collections.max(earthquakeArrayList, cmp3);
+//        Log.d(TAG, "mostNorth " + mostNorth);
+//
+//        Earthquake mostEast = Collections.max(earthquakeArrayList, cmp4);
+//        Log.d(TAG, "mostEast " + mostEast);
+//
+//        Earthquake mostWest = Collections.min(earthquakeArrayList, cmp4);
+//        Log.d(TAG, "mostWest " + mostWest);
 
-        Earthquake lowestMagnitude = Collections.min(earthquakeArrayList, Earthquake.cmp2);
-        Log.d(TAG, "lowestMagnitude " + lowestMagnitude);
+//        Double max = Double.MIN_VALUE;
+//        for (Earthquake e : earthquakeArrayList){
+//           if (e.getDateTime() == selectedDate && e.getDepth() > max) {
+//               max = e.getDepth();
+//
+//            }
+//        }
+//        Log.d(TAG, "onItemSelected: " + max);
 
-        Earthquake highestMagnitude = Collections.max(earthquakeArrayList, Earthquake.cmp2);
-        Log.d(TAG, "highestMagnitude " + highestMagnitude);
+        double max = 0;
+        for (Earthquake e : earthquakeArrayList){
+            if (e.getDateTime().equals(selectedDate) & e.getDepth() > max){
+                max = e.getDepth();
+                //e = lowestDepthDate;
+            }
 
-        Earthquake mostSouth = Collections.min(earthquakeArrayList, Earthquake.cmp3);
-        Log.d(TAG, "mostSouth " + mostSouth);
+        }
 
-        Earthquake mostNorth = Collections.max(earthquakeArrayList, Earthquake.cmp3);
-        Log.d(TAG, "mostNorth " + mostNorth);
-
-        Earthquake mostEast = Collections.max(earthquakeArrayList, Earthquake.cmp4);
-        Log.d(TAG, "mostEast " + mostEast);
-
-        Earthquake mostWest = Collections.min(earthquakeArrayList, Earthquake.cmp4);
-        Log.d(TAG, "mostWest " + mostWest);
-
+        Log.d(TAG, "Max value: " + max);
     }
 
 
-    @Override
-    public void onNothingSelected(AdapterView<?> arg0) {
+
+
+        @Override
+        public void onNothingSelected (AdapterView < ? > arg0){
         // TODO Auto-generated method stub
     }
+
+
+
+
+    public final Comparator<Earthquake> cmp = new Comparator<Earthquake>() {
+        @Override
+
+        public int compare (Earthquake o1, Earthquake o2) {
+
+
+
+           // if (o2.getDateTime().equals(selectedDate) && o1.getDateTime().equals(selectedDate))
+
+            return o1.getDepth().compareTo(o2.getDepth());
+
+//else
+   // return 0;
+//            if (o1.getDateTime().equals(selectedDate)) {
+//                if (o2.getDateTime().equals(selectedDate)) {
+//                    return 0;
+//                }
+//                return -1;
+//            }
+//        } else if (o2.getDateTime().equals(selectedDate)) {
+//            return 1;
+//    }
+//
+//                return Double.compare(o1.getDepth(), o2.getDepth());
+//            }
+
+        }
+    };
+
+    public static final Comparator<Earthquake> cmp2 = new Comparator<Earthquake>() {
+        @Override
+        public int compare(Earthquake o1, Earthquake o2) {
+            return Double.compare(o1.getMagnitude(), o2.getMagnitude());
+        }
+    };
+
+    public static final Comparator<Earthquake> cmp3 = new Comparator<Earthquake>() {
+        @Override
+        public int compare(Earthquake o1, Earthquake o2) {
+            return Double.compare(o1.getLongitude(), o2.getLongitude());
+        }
+    };
+
+    public static final Comparator<Earthquake> cmp4 = new Comparator<Earthquake>() {
+        @Override
+        public int compare(Earthquake o1, Earthquake o2) {
+            return Double.compare(o1.getLatitude(), o2.getLatitude());
+        }
+    };
+
 
 
 }

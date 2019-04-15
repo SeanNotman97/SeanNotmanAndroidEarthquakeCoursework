@@ -181,33 +181,6 @@ public class Earthquake implements Parcelable {
         return eTime;
     }
 
-    public static final Comparator<Earthquake> cmp = new Comparator<Earthquake>() {
-        @Override
-        public int compare(Earthquake o1, Earthquake o2) {
-            return Double.compare(o1.getDepth(), o2.getDepth());
-        }
-    };
-
-    public static final Comparator<Earthquake> cmp2 = new Comparator<Earthquake>() {
-        @Override
-        public int compare(Earthquake o1, Earthquake o2) {
-            return Double.compare(o1.getMagnitude(), o2.getMagnitude());
-        }
-    };
-
-    public static final Comparator<Earthquake> cmp3 = new Comparator<Earthquake>() {
-        @Override
-        public int compare(Earthquake o1, Earthquake o2) {
-            return Double.compare(o1.getLongitude(), o2.getLongitude());
-        }
-    };
-
-    public static final Comparator<Earthquake> cmp4 = new Comparator<Earthquake>() {
-        @Override
-        public int compare(Earthquake o1, Earthquake o2) {
-            return Double.compare(o1.getLatitude(), o2.getLatitude());
-        }
-    };
 
 
 
