@@ -326,7 +326,7 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
         int id = item.getItemId();
 //        final ParseEarthquakes parseEarthquakes = new ParseEarthquakes();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_map) {
 
             Intent intentEarthquakeMap = new Intent(MainActivity.this, MapsActivity2.class);
             intentEarthquakeMap.putParcelableArrayListExtra("EarthquakeList", earthquakeArrayList);
@@ -334,7 +334,7 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 
             startActivity(intentEarthquakeMap);
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_dateSearch) {
 
             Intent intentEarthquakeList = new Intent(MainActivity.this, MainActivity5.class);
             intentEarthquakeList.putParcelableArrayListExtra("EarthquakeList", earthquakeArrayList);
@@ -344,12 +344,6 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 
         } else if (id == R.id.nav_slideshow) {
 
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 

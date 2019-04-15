@@ -44,17 +44,22 @@ public class FeedAdapter extends ArrayAdapter implements Filterable {
         }
         TextView locationText = (TextView) convertView.findViewById(R.id.earthquakeLocation);
         TextView dayText = (TextView) convertView.findViewById(R.id.tvArtist);
+        TextView magnitudeText = (TextView) convertView.findViewById(R.id.tvSummary);
         //   TextView tvSummary = (TextView) convertView.findViewById(R.id.tvSummary);
 
         Earthquake earthquakeItem = applications.get(position);
 
-       // String desc = earthquakeItem.getName();
 
         //https://www.youtube.com/watch?v=sJ-Z9G0SDhc
-
         dayText.setText(earthquakeItem.getDay());
         locationText.setText(earthquakeItem.getLocation());
 
+        magnitudeText.setText(String.valueOf(earthquakeItem.getMagnitude()));
+
+//        for (Earthquake e: applications){
+//            if e.getMagnitude(>3)
+//
+//        }
         //tvName.setText(location[1]);
         //   tvArtist.setText(currentApp.getArtist());
 //        tvSummary.setText(currentApp.getSummary());
