@@ -21,9 +21,10 @@ public class Earthquake implements Parcelable {
     private Double depth;
     private Double magnitude;
     private String dateTime;
+    private String eTime;
 
 
-    public Earthquake(String name, Double latitude, Double longitude, String day, String location, Double depth, Double magnitude, String dateTime) {
+    public Earthquake(String name, Double latitude, Double longitude, String day, String location, Double depth, Double magnitude, String dateTime, String eTime) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -32,6 +33,7 @@ public class Earthquake implements Parcelable {
         this.depth = depth;
         this.magnitude = magnitude;
         this.dateTime = dateTime;
+        this.eTime = eTime;
     }
 
     public Earthquake(){
@@ -43,6 +45,7 @@ public class Earthquake implements Parcelable {
         this.depth = 0.0;
         this.magnitude = 0.0;
         this.dateTime = "";
+        this.eTime = "";
     }
 
 
@@ -69,6 +72,7 @@ public class Earthquake implements Parcelable {
         depth = in.readDouble();
         magnitude = in.readDouble();
         dateTime = in.readString();
+        eTime = in.readString();
     }
 
     public static final Creator<Earthquake> CREATOR = new Creator<Earthquake>() {
@@ -83,8 +87,6 @@ public class Earthquake implements Parcelable {
             return new Earthquake[size];
 
         }
-
-
 
     };
 
@@ -103,6 +105,7 @@ public class Earthquake implements Parcelable {
         parcel.writeDouble(depth);
         parcel.writeDouble(magnitude);
         parcel.writeString(dateTime);
+        parcel.writeString(eTime);
     }
 
     public String getName() {
@@ -168,6 +171,14 @@ public class Earthquake implements Parcelable {
 
     public String getDateTime() {
         return dateTime;
+    }
+
+    public void seteTime(String eTime) {
+        this.eTime = eTime;
+    }
+
+    public String geteTime() {
+        return eTime;
     }
 
     public static final Comparator<Earthquake> cmp = new Comparator<Earthquake>() {

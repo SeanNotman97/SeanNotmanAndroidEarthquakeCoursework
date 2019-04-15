@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.d(TAG, "onPostExecute: parameter is " + s);
+            //Log.d(TAG, "onPostExecute: parameter is " + s);
             final ParseEarthquakes parseEarthquakes = new ParseEarthquakes();
             parseEarthquakes.parse(s);
 
@@ -97,15 +97,50 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 
     String day = daySplit[0];
 
-    String dateTime = daySplit[1];
+    String dateTimeSplit = daySplit[1];
 
-    earthquakeItem.setDateTime(dateTime);
+    Log.d(TAG, "dayTimeSplit" + dateTimeSplit);
+
+    String[] dateTime1 = dateTimeSplit.split(" ", -1);
+
+    String dateTime = dateTime1[1];
+
+    String dateTimea1 = dateTime1[2];
+
+    String dateTimea2 = dateTime1[3];
+
+    String dateTimea3 = (dateTime + " " + dateTimea1 + " " + dateTimea2);
+
+    Log.d(TAG, "dateTime " + dateTimea3);
+
+    earthquakeItem.setDateTime(dateTimea3);
     //  currentApp.setDay(day);
 
     Log.d(TAG, "getDay: " + day);
 
-
     earthquakeItem.setDay(day);
+//
+//    String timeSplit1 = dateTime1[4];
+
+    //Log.d(TAG, "TimeSplit " + timeSplit1);
+
+//    String[] timeSplit2 = splitDescription[0].split(":", -1);
+//
+    String timeSplit3 = dateTime1[4];
+//
+   String timeSplit4 = dayDateTime[2];
+//
+   String timeSplit5 = dayDateTime[3];
+
+    Log.d(TAG, "ts1 " + "/" + timeSplit3 + "/" + timeSplit4 + "/" + timeSplit5);
+
+    earthquakeItem.seteTime(timeSplit3 + ":" + timeSplit4 + ":" + timeSplit5);
+//    Log.d(TAG, "timesplit3: " + timeSplit3);
+//    Log.d(TAG, "timeSplit4" + timeSplit4);
+//    Log.d(TAG, "tuneSplit5" + timeSplit5);
+
+
+
 
 
 
@@ -145,7 +180,7 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 
     String depth = splitDepth3[0];
 
-    Log.d(TAG, "onPostExecute: " + depth);
+    //Log.d(TAG, "onPostExecute: " + depth);
 
 
 
@@ -161,7 +196,7 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 
     earthquakeItem.setMagnitude(Double.valueOf(magnitude));
 
-    Log.d(TAG, "onPostExecute: " + earthquakeItem.toString());
+   // Log.d(TAG, "onPostExecute: " + earthquakeItem.toString());
 
 
 
