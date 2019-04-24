@@ -29,9 +29,14 @@ public class MainActivity4 extends AppCompatActivity implements OnMapReadyCallba
         Intent intent = getIntent();
         Earthquake earthquakeItem = intent.getParcelableExtra("Example Item");
 
-        String earthquakeName = earthquakeItem.getName();
+        String earthquakeName = earthquakeItem.getLocation();
         Double earthquakeMagnitude = earthquakeItem.getMagnitude();
         Double earthquakeDepth = earthquakeItem.getDepth();
+        String earthquakeTime = earthquakeItem.geteTime();
+        String earthquakeDay = earthquakeItem.getDay();
+        String earthquakeDate = earthquakeItem.getDateTime();
+
+
 
         String earthquakeMarker = earthquakeItem.getLocation();
         earthquakeMarkerTitle = earthquakeMarker;
@@ -50,6 +55,19 @@ public class MainActivity4 extends AppCompatActivity implements OnMapReadyCallba
         TextView textView3 = findViewById(R.id.activity4_textView3);
         textView3.setText(earthquakeDepth.toString());
 
+        TextView textView4 = findViewById(R.id.textView3);
+        textView4.setText(earthquakeDate);
+
+        TextView textView5 = findViewById(R.id.textView6);
+       textView5.setText(earthquakeDay);
+
+        TextView textView7 = findViewById(R.id.textView7);
+        textView7.setText(earthquakeTime);
+
+
+
+
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -65,10 +83,6 @@ public class MainActivity4 extends AppCompatActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        //double Latd = Double.parseDouble(preEarthquakeLat);
-        //double Longd = Double.parseDouble(preEarthquakeLong);
-
         // Add a marker in Sydney and move the camera
         LatLng earthquakeLocation = new LatLng(EarthquakeLat, EarthquakeLong);
 
@@ -76,6 +90,7 @@ public class MainActivity4 extends AppCompatActivity implements OnMapReadyCallba
 
         mMap.addMarker(new MarkerOptions().position(earthquakeLocation).title(earthquakeMarkerTitle));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(earthquakeLocation));
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 12.0f ) );
     }
 
 

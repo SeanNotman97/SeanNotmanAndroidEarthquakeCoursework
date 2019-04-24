@@ -344,6 +344,10 @@ for(Earthquake earthquakeItem : earthquakeArrayList){
 
         } else if (id == R.id.nav_slideshow) {
 
+            Intent intentEarthquakeList = new Intent(MainActivity.this, MainActivity6.class);
+            intentEarthquakeList.putParcelableArrayListExtra("EarthquakeList", earthquakeArrayList);
+
+            startActivity(intentEarthquakeList);
 
         }
 

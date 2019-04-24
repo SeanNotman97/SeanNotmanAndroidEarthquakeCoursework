@@ -142,16 +142,47 @@ public class MainActivity5 extends AppCompatActivity implements AdapterView.OnIt
 //        }
 //        Log.d(TAG, "onItemSelected: " + max);
 
-        double max = 0;
+
+        double minDepth = 0;
         for (Earthquake e : earthquakeArrayList){
-            if (e.getDateTime().equals(selectedDate) & e.getDepth() > max){
-                max = e.getDepth();
+            if (e.getDateTime().equals(selectedDate) & e.getDepth() < minDepth){
+                minDepth = e.getDepth();
                 //e = lowestDepthDate;
             }
 
         }
 
-        Log.d(TAG, "Max value: " + max);
+
+        double maxDepth = 0;
+        for (Earthquake e : earthquakeArrayList){
+            if (e.getDateTime().equals(selectedDate) & e.getDepth() > maxDepth){
+                maxDepth = e.getDepth();
+                //e = lowestDepthDate;
+            }
+
+        }
+
+
+        double minMagnitude = 0;
+        for (Earthquake e : earthquakeArrayList){
+            if (e.getDateTime().equals(selectedDate) & e.getMagnitude() < minMagnitude){
+                minMagnitude = e.getMagnitude();
+                //e = lowestDepthDate;
+            }
+
+        }
+
+        double maxMagnitude = 0;
+        for (Earthquake e : earthquakeArrayList){
+            if (e.getDateTime().equals(selectedDate) & e.getMagnitude() > maxMagnitude){
+                maxMagnitude = e.getDepth();
+                //e = lowestDepthDate;
+            }
+
+        }
+
+
+        Log.d(TAG, "Max value: " + maxDepth);
     }
 
 
@@ -164,17 +195,17 @@ public class MainActivity5 extends AppCompatActivity implements AdapterView.OnIt
 
 
 
-
-    public final Comparator<Earthquake> cmp = new Comparator<Earthquake>() {
-        @Override
-
-        public int compare (Earthquake o1, Earthquake o2) {
-
-
-
-           // if (o2.getDateTime().equals(selectedDate) && o1.getDateTime().equals(selectedDate))
-
-            return o1.getDepth().compareTo(o2.getDepth());
+//
+//    public final Comparator<Earthquake> cmp = new Comparator<Earthquake>() {
+//        @Override
+//
+//        public int compare (Earthquake o1, Earthquake o2) {
+//
+//
+//
+//           // if (o2.getDateTime().equals(selectedDate) && o1.getDateTime().equals(selectedDate))
+//
+//            return o1.getDepth().compareTo(o2.getDepth());
 
 //else
    // return 0;
@@ -191,29 +222,29 @@ public class MainActivity5 extends AppCompatActivity implements AdapterView.OnIt
 //                return Double.compare(o1.getDepth(), o2.getDepth());
 //            }
 
-        }
-    };
-
-    public static final Comparator<Earthquake> cmp2 = new Comparator<Earthquake>() {
-        @Override
-        public int compare(Earthquake o1, Earthquake o2) {
-            return Double.compare(o1.getMagnitude(), o2.getMagnitude());
-        }
-    };
-
-    public static final Comparator<Earthquake> cmp3 = new Comparator<Earthquake>() {
-        @Override
-        public int compare(Earthquake o1, Earthquake o2) {
-            return Double.compare(o1.getLongitude(), o2.getLongitude());
-        }
-    };
-
-    public static final Comparator<Earthquake> cmp4 = new Comparator<Earthquake>() {
-        @Override
-        public int compare(Earthquake o1, Earthquake o2) {
-            return Double.compare(o1.getLatitude(), o2.getLatitude());
-        }
-    };
+//        }
+//    };
+//
+//    public static final Comparator<Earthquake> cmp2 = new Comparator<Earthquake>() {
+//        @Override
+//        public int compare(Earthquake o1, Earthquake o2) {
+//            return Double.compare(o1.getMagnitude(), o2.getMagnitude());
+//        }
+//    };
+//
+//    public static final Comparator<Earthquake> cmp3 = new Comparator<Earthquake>() {
+//        @Override
+//        public int compare(Earthquake o1, Earthquake o2) {
+//            return Double.compare(o1.getLongitude(), o2.getLongitude());
+//        }
+//    };
+//
+//    public static final Comparator<Earthquake> cmp4 = new Comparator<Earthquake>() {
+//        @Override
+//        public int compare(Earthquake o1, Earthquake o2) {
+//            return Double.compare(o1.getLatitude(), o2.getLatitude());
+//        }
+//    };
 
 
 

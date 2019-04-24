@@ -3,6 +3,8 @@ package com.example.seannotman;
 
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ public class FeedAdapter extends ArrayAdapter implements Filterable {
     private List<Earthquake> applications;
     private List<Earthquake> listCopyFull;
 
+
     public FeedAdapter(Context context, int resource, List<Earthquake> applications) {
         super(context, resource);
         this.layoutResource = resource;
@@ -42,28 +45,25 @@ public class FeedAdapter extends ArrayAdapter implements Filterable {
         if(convertView == null) {
             convertView = layoutInflater.inflate(layoutResource, parent, false);
         }
-        TextView locationText = (TextView) convertView.findViewById(R.id.earthquakeLocation);
-        TextView dayText = (TextView) convertView.findViewById(R.id.tvArtist);
-        TextView magnitudeText = (TextView) convertView.findViewById(R.id.tvSummary);
-        //   TextView tvSummary = (TextView) convertView.findViewById(R.id.tvSummary);
-
         Earthquake earthquakeItem = applications.get(position);
+        TextView locationText = (TextView) convertView.findViewById(R.id.earthquakeLocation);
+        TextView dateText = (TextView) convertView.findViewById(R.id.dateTime);
+        TextView dayText = (TextView) convertView.findViewById(R.id.earthquakeDay);
+        TextView magnitudeText = (TextView) convertView.findViewById(R.id.earthquakeMagnitude);
+        if ((earthquakeItem.getMagnitude() >= 2)) {
+            magnitudeText.setTextColor(Color.RED);
+        } else if (earthquakeItem.getMagnitude() <2 && earthquakeItem.getMagnitude() >1){
+            magnitudeText.setTextColor(Color.parseColor("#FFA500"));
 
-
-        //https://www.youtube.com/watch?v=sJ-Z9G0SDhc
-        dayText.setText(earthquakeItem.getDay());
-        locationText.setText(earthquakeItem.getLocation());
+        }
+        else if (earthquakeItem.getMagnitude() <= 1){
+            magnitudeText.setTextColor(Color.LTGRAY);
+        }
 
         magnitudeText.setText(String.valueOf(earthquakeItem.getMagnitude()));
-
-//        for (Earthquake e: applications){
-//            if e.getMagnitude(>3)
-//
-//        }
-        //tvName.setText(location[1]);
-        //   tvArtist.setText(currentApp.getArtist());
-//        tvSummary.setText(currentApp.getSummary());
-
+        dateText.setText(String.valueOf(earthquakeItem.getDateTime()));
+        locationText.setText(earthquakeItem.getLocation());
+        dayText.setText(earthquakeItem.getDay());
         return convertView;
     }
 
