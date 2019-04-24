@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -81,17 +82,17 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
             //  Bitmap.createBitmap(mapManager.getMarkerColor());
 
-            if (Magnitude >= 3) {
-                mMap.addMarker(new MarkerOptions().position(earthquakeLocation).title(earthquakeMarkerTitle).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_mag_med)));
+            if (Magnitude >= 2) {
+                mMap.addMarker(new MarkerOptions().position(earthquakeLocation).title(earthquakeMarkerTitle).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_mag_high)));
                 //  mMap.moveCamera(CameraUpdateFactory.newLatLng(earthquakeLocation));
             }
 
 
-            else  if (Magnitude >=2 && Magnitude < 3) {
+            else  if (Magnitude >=1 && Magnitude < 2) {
                 mMap.addMarker(new MarkerOptions().position(earthquakeLocation).title(earthquakeMarkerTitle).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_mag_med)));
 
             }
-        else  if (Magnitude >=1 && Magnitude < 2) {
+        else  if (Magnitude >=0 && Magnitude < 1) {
               mMap.addMarker(new MarkerOptions().position(earthquakeLocation).title(earthquakeMarkerTitle).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_mag_low)));
 //
            }
@@ -100,10 +101,24 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 //
 //            }
 
+
+
             else {
                 Log.d(TAG, "Error - magnitude below zero");
             }
 
+            //https://stackoverflow.com/questions/14074129/google-maps-v2-set-both-my-location-and-zoom-in
+
+            CameraUpdate center=
+                    CameraUpdateFactory.newLatLng(new LatLng(55.3781,
+                            -3.569015));
+
+            CameraUpdate zoom =CameraUpdateFactory.zoomTo(5);
+
+
+            mMap.moveCamera(center);
+
+            mMap.animateCamera(zoom);
         }
     }
 

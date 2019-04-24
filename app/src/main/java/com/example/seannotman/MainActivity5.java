@@ -143,7 +143,7 @@ public class MainActivity5 extends AppCompatActivity implements AdapterView.OnIt
 //        Log.d(TAG, "onItemSelected: " + max);
 
 
-        double minDepth = 0;
+        double minDepth = 999;
         for (Earthquake e : earthquakeArrayList){
             if (e.getDateTime().equals(selectedDate) & e.getDepth() < minDepth){
                 minDepth = e.getDepth();
@@ -151,7 +151,6 @@ public class MainActivity5 extends AppCompatActivity implements AdapterView.OnIt
             }
 
         }
-
 
         double maxDepth = 0;
         for (Earthquake e : earthquakeArrayList){
@@ -162,8 +161,7 @@ public class MainActivity5 extends AppCompatActivity implements AdapterView.OnIt
 
         }
 
-
-        double minMagnitude = 0;
+        double minMagnitude = 999;
         for (Earthquake e : earthquakeArrayList){
             if (e.getDateTime().equals(selectedDate) & e.getMagnitude() < minMagnitude){
                 minMagnitude = e.getMagnitude();
@@ -175,14 +173,77 @@ public class MainActivity5 extends AppCompatActivity implements AdapterView.OnIt
         double maxMagnitude = 0;
         for (Earthquake e : earthquakeArrayList){
             if (e.getDateTime().equals(selectedDate) & e.getMagnitude() > maxMagnitude){
-                maxMagnitude = e.getDepth();
+                maxMagnitude = e.getMagnitude();
                 //e = lowestDepthDate;
             }
 
         }
 
+        double mostWest = 999;
+        for (Earthquake e : earthquakeArrayList){
+            if (e.getDateTime().equals(selectedDate) & e.getLatitude() < mostWest){
+                mostWest = e.getLatitude();
+                //e = lowestDepthDate;
+            }
+        }
+
+
+
+        double mostEast = -999;
+        for (Earthquake e : earthquakeArrayList){
+            if (e.getDateTime().equals(selectedDate) & e.getLatitude() > mostEast){
+                mostEast = e.getLatitude();
+                //e = lowestDepthDate;
+            }
+        }
+
+        double mostNorth = -999;
+        for (Earthquake e : earthquakeArrayList){
+            if (e.getDateTime().equals(selectedDate) & e.getLongitude() > mostNorth){
+                mostNorth = e.getLongitude();
+                //e = lowestDepthDate;
+            }
+        }
+
+
+
+        double mostSouth = 999;
+        for (Earthquake e : earthquakeArrayList){
+            if (e.getDateTime().equals(selectedDate) & e.getLongitude() < mostSouth){
+                mostSouth = e.getLongitude();
+                //e = lowestDepthDate;
+            }
+        }
+
 
         Log.d(TAG, "Max value: " + maxDepth);
+
+
+        Log.d(TAG, "Min Depth: " + minDepth);
+
+        TextView textView64 = findViewById(R.id.textView64);
+        textView64.setText(toString().valueOf(minDepth));
+
+        TextView textView63 = findViewById(R.id.textView63);
+        textView63.setText(toString().valueOf(maxDepth));
+
+        TextView textView62 = findViewById(R.id.textView62);
+        textView62.setText(toString().valueOf(minMagnitude));
+
+        TextView textView61 = findViewById(R.id.textView61);
+        textView61.setText(toString().valueOf(maxMagnitude));
+
+        TextView textView60 = findViewById(R.id.textView60);
+        textView60.setText(toString().valueOf(mostSouth));
+
+        TextView textView59 = findViewById(R.id.textView59);
+        textView59.setText(toString().valueOf(mostWest));
+
+        TextView textView58 = findViewById(R.id.textView58);
+        textView58.setText(toString().valueOf(mostEast));
+
+        TextView textView57 = findViewById(R.id.textView57);
+        textView57.setText(toString().valueOf(mostNorth));
     }
 
 
